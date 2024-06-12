@@ -1,4 +1,4 @@
-package io.github.reskimulud.myloginapps
+package io.github.reskimulud.myloginapps.presentation
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import io.github.reskimulud.myloginapps.R
 import io.github.reskimulud.myloginapps.databinding.FragmentFirstBinding
 
 /**
