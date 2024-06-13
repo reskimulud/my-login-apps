@@ -1,8 +1,19 @@
+import com.android.build.gradle.internal.api.BaseVariantOutputImpl
+import java.util.Date
+
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
     alias(libs.plugins.ksp)
     alias(libs.plugins.dagger.hilt.android.plugin)
+}
+
+ext {
+    set("majorVersion", 1)
+    set("minorVersion", 0)
+    set("patchVersion", 0)
+    set("developmentVersion", 1)
+    set("preReleaseVersion", null)
 }
 
 android {
@@ -13,8 +24,8 @@ android {
         applicationId = "io.github.reskimulud.myloginapps"
         minSdk = 24
         targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = generateVersionCode()
+        versionName = generateVersionName()
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -37,6 +48,32 @@ android {
     }
     buildFeatures {
         viewBinding = true
+        buildConfig = true
+    }
+
+    setFlavorDimensions(listOf("env"))
+    productFlavors {
+        create("development") {
+            dimension = "env"
+            buildConfigField("int", "STAGE_TYPE", "0")
+            applicationIdSuffix = ".dev"
+        }
+        create("staging") {
+            dimension = "env"
+            buildConfigField("int", "STAGE_TYPE", "1")
+            applicationIdSuffix = ".stag"
+        }
+        create("production") {
+            dimension = "env"
+            buildConfigField("int", "STAGE_TYPE", "2")
+        }
+    }
+
+    applicationVariants.configureEach {
+        buildOutputs.all {
+            val variantOutputImpl = this as BaseVariantOutputImpl
+            variantOutputImpl.outputFileName = "MyLoginApp_${versionName}_${applicationId}_${Date().time}.apk"
+        }
     }
 }
 
@@ -59,4 +96,31 @@ dependencies {
     implementation(libs.retrofit.converter.gson)
     debugImplementation(libs.chucker)
     releaseImplementation(libs.chucker.no.op)
+
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.crashlytics)
+}
+
+fun generateVersionCode() : Int {
+    return ext.let {
+        it.get("majorVersion") as Int * 10000 + it.get("minorVersion") as Int * 100 + it.get("patchVersion") as Int
+    }
+}
+
+fun generateVersionName() : String {
+    return ext.let {
+        val versionName = StringBuilder("")
+            .append(it.get("majorVersion"))
+            .append(".")
+            .append(it.get("minorVersion"))
+            .append(".")
+            .append(it.get("patchVersion"))
+        val devVersion: Int = it.get("developmentVersion") as Int
+        if (devVersion > 0) versionName.append(".$devVersion")
+
+        val preReleaseVersion = it.get("preReleaseVersion") as String?
+        if (!preReleaseVersion.isNullOrEmpty()) versionName.append(".$preReleaseVersion")
+
+        versionName.toString()
+    }
 }
