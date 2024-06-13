@@ -1,4 +1,4 @@
-name: Android CI Development
+name: Android CI/CD Staging
 
 env:
   main_project_module: app

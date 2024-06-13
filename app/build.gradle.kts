@@ -173,6 +173,13 @@ tasks {
 
         dependsOn("assembleStagingDebug", "appDistributionUploadStagingDebug")
     }
+
+    register("assembleProductionAndUpload") {
+        group = "Custom"
+        description = "Assemble production release (build APK) and upload it to App Distribution"
+
+        dependsOn("assembleProductionRelease", "appDistributionUploadProductionRelease")
+    }
 }
 
 fun generateVersionCode() : Int {
