@@ -1,0 +1,58 @@
+name: Android CI Development
+
+env:
+  main_project_module: app
+  STORE_PASSWORD: ${{ secrets.STORE_PASSWORD }}
+  KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+  KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+  SERVICE_CREDENTIAL: ${{ github.workspace }}/service-account-file.json
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    name: Build and Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Set Up JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: 17
+
+      - name: Change wrapper permissions
+        run: chmod +x ./gradlew
+
+      - name: Build gradle project
+        run: ./gradlew buildProductionDebug buildProductionRelease
+
+      - name: Run lint tests
+        run: ./gradlew testProductionDebug
+
+  deploy:
+    name: Upload to Firebase App Distribution
+    runs-on: ubuntu-latest
+    needs: 'build'
+
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Decode Firebase service account
+        run: echo ${{ secrets.SERVICE_CREDENTIAL }} | base64 --decode > ${{ github.workspace }}/service-account-file.json
+
+      - name: Set Up JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: 17
+
+      - name: Change wrapper permissions
+        run: chmod +x ./gradlew
+
+      - name: Build Development Debug and Upload
+        run: ./gradlew assembleProductionAndUpload

@@ -1,0 +1,21 @@
+{
+  "version": 3,
+  "artifactType": {
+    "type": "APK",
+    "kind": "Directory"
+  },
+  "applicationId": "io.github.reskimulud.myloginapps.dev",
+  "variantName": "developmentDebug",
+  "elements": [
+    {
+      "type": "SINGLE",
+      "filters": [],
+      "attributes": [],
+      "versionCode": 10000,
+      "versionName": "1.0.0.1",
+      "outputFile": "MyLoginApp_1.0.0.1_io.github.reskimulud.myloginapps_1718266015971.apk"
+    }
+  ],
+  "elementType": "File",
+  "minSdkVersionForDexing": 24
+}
