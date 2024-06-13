@@ -13,3 +13,5 @@
 .externalNativeBuild
 .cxx
 local.properties
+/market/README.txt
+*.apk
