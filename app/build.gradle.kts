@@ -1,5 +1,6 @@
 import com.android.build.gradle.internal.api.BaseVariantOutputImpl
 import com.google.firebase.appdistribution.gradle.firebaseAppDistribution
+import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Properties
 
@@ -105,22 +106,33 @@ android {
             dimension = "env"
             buildConfigField("int", "STAGE_TYPE", "0")
             applicationIdSuffix = ".dev"
+            versionNameSuffix = "-$buildTypes"
+            firebaseAppDistribution {
+                this.releaseNotes = "My Login Apps $buildTypes v$versionName"
+            }
         }
         create("staging") {
             dimension = "env"
             buildConfigField("int", "STAGE_TYPE", "1")
             applicationIdSuffix = ".stag"
+            versionNameSuffix = "-$buildTypes"
+            firebaseAppDistribution {
+                this.releaseNotes = "My Login Apps $buildTypes v$versionName"
+            }
         }
         create("production") {
             dimension = "env"
             buildConfigField("int", "STAGE_TYPE", "2")
+            firebaseAppDistribution {
+                this.releaseNotes = "My Login Apps v$versionName"
+            }
         }
     }
 
     applicationVariants.configureEach {
         buildOutputs.all {
             val variantOutputImpl = this as BaseVariantOutputImpl
-            variantOutputImpl.outputFileName = "MyLoginApp_${versionName}_${applicationId}_${Date().time}.apk"
+            variantOutputImpl.outputFileName = "MyLoginApp_${variantOutputImpl.name}_${versionName}_${getCurrentDate("dd.MM.YYYY")}.apk"
         }
     }
 }
@@ -177,4 +189,10 @@ fun readProperties(propertiesFile: File) = Properties().apply {
     propertiesFile.inputStream().use { fis ->
         load(fis)
     }
+}
+
+fun getCurrentDate(pattern: String): String {
+    val date = Date()
+    val formatter = SimpleDateFormat(pattern)
+    return formatter.format(date)
 }
