@@ -1,5 +1,6 @@
 import com.android.build.gradle.internal.api.BaseVariantOutputImpl
 import java.util.Date
+import java.util.Properties
 
 plugins {
     alias(libs.plugins.androidApplication)
@@ -33,13 +34,33 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    signingConfigs {
+        all {
+            storeFile = file("$rootDir/market/myloginapps.jks")
+            val localProperties = readProperties(file("$rootDir/local.properties"))
+
+            if (!localProperties.isEmpty) {
+                storePassword = localProperties["storePassword"] as String
+                keyAlias = localProperties["keyAlias"] as String
+                keyPassword = localProperties["keyPassword"] as String
+            } else {
+                storePassword = System.getenv("STORE_PASSWORD")
+                keyAlias = System.getenv("KEY_ALIAS")
+                keyPassword = System.getenv("KEY_PASSWORD")
+            }
+        }
+    }
+
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+        }
+        debug {
+            isMinifyEnabled = false
         }
     }
     compileOptions {
@@ -125,5 +146,11 @@ fun generateVersionName() : String {
         if (!preReleaseVersion.isNullOrEmpty()) versionName.append(".$preReleaseVersion")
 
         versionName.toString()
+    }
+}
+
+fun readProperties(propertiesFile: File) = Properties().apply {
+    propertiesFile.inputStream().use { fis ->
+        load(fis)
     }
 }
