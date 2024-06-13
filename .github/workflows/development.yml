@@ -39,10 +39,6 @@ jobs:
       - name: Run lint tests
         run: ./gradlew test
 
-      # Run Unit Tests module :core
-      - name: Run Unit Test module core
-        run: ./gradlew :core:testDebugUnitTest
-
   deploy:
     name: Upload to Firebase App Distribution
     runs-on: ubuntu-latest
