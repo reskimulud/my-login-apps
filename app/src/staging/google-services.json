@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "248658826070",
-    "project_id": "mankart-exercise",
-    "storage_bucket": "mankart-exercise.appspot.com"
+    "project_number": "295649079718",
+    "project_id": "mankart",
+    "storage_bucket": "mankart.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:248658826070:android:94d94554f43db8a49ffcf7",
+        "mobilesdk_app_id": "1:295649079718:android:c01aac2ac6dc7d90821f67",
         "android_client_info": {
           "package_name": "io.github.reskimulud.myloginapps"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDWisFuKCjyv6lzT84oHgYcCe58kFbTQ7o"
+          "current_key": "AIzaSyAh7T6PXTT_lOmhxW4Ip0jNDPoy1gVCdPA"
         }
       ],
       "services": {
@@ -26,7 +26,7 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:248658826070:android:bd4b4f9a53b15da09ffcf7",
+        "mobilesdk_app_id": "1:295649079718:android:7bc4f19567e79e65821f67",
         "android_client_info": {
           "package_name": "io.github.reskimulud.myloginapps.dev"
         }
@@ -34,7 +34,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDWisFuKCjyv6lzT84oHgYcCe58kFbTQ7o"
+          "current_key": "AIzaSyAh7T6PXTT_lOmhxW4Ip0jNDPoy1gVCdPA"
         }
       ],
       "services": {
@@ -45,7 +45,7 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:248658826070:android:631adb580db1f50c9ffcf7",
+        "mobilesdk_app_id": "1:295649079718:android:c4c04f0e743e06fc821f67",
         "android_client_info": {
           "package_name": "io.github.reskimulud.myloginapps.stag"
         }
@@ -53,7 +53,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDWisFuKCjyv6lzT84oHgYcCe58kFbTQ7o"
+          "current_key": "AIzaSyAh7T6PXTT_lOmhxW4Ip0jNDPoy1gVCdPA"
         }
       ],
       "services": {
