@@ -1,4 +1,5 @@
 import com.android.build.gradle.internal.api.BaseVariantOutputImpl
+import com.google.firebase.appdistribution.gradle.firebaseAppDistribution
 import java.util.Date
 import java.util.Properties
 
@@ -61,6 +62,14 @@ android {
         }
         debug {
             isMinifyEnabled = false
+        }
+        all {
+            firebaseAppDistribution {
+                val localProperties = readProperties(file("$rootDir/local.properties"))
+                testers = "reski.mulud@gmail.com"
+                artifactType = "APK"
+                serviceCredentialsFile = if (!localProperties.isEmpty) localProperties["serviceCredentialFilePath"] as String else System.getenv("SERVICE_CREDENTIAL")
+            }
         }
     }
     compileOptions {
