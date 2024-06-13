@@ -14,6 +14,10 @@ ksp = "2.0.0-1.0.22"
 dagger-hilt = "2.51.1"
 retrofit = "2.11.0"
 chucker = "4.0.0"
+google-gms-service = "4.4.2"
+firebase = "33.1.0"
+firebase-crashlytics = "3.0.1"
+appdistribution = "5.0.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -32,10 +36,15 @@ retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = 
 retrofit-converter-gson = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofit" }
 chucker = { group = "com.github.chuckerteam.chucker", name = "library", version.ref = "chucker" }
 chucker-no-op = { group = "com.github.chuckerteam.chucker", name = "library-no-op", version.ref = "chucker" }
+firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebase" }
+firebase-crashlytics = { group = "com.google.firebase", name = "firebase-crashlytics" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 jetbrainsKotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 dagger-hilt-android-plugin = { id = "com.google.dagger.hilt.android", version.ref = "dagger-hilt" }
+google-service = { id = "com.google.gms.google-services", version.ref = "google-gms-service" }
+firebase-crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "firebase-crashlytics" }
+appdistribution = { id = "com.google.firebase.appdistribution", version.ref = "appdistribution" }
 

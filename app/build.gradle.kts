@@ -6,6 +6,9 @@ plugins {
     alias(libs.plugins.jetbrainsKotlinAndroid)
     alias(libs.plugins.ksp)
     alias(libs.plugins.dagger.hilt.android.plugin)
+    alias(libs.plugins.google.service)
+    alias(libs.plugins.firebase.crashlytics)
+    alias(libs.plugins.appdistribution)
 }
 
 ext {
