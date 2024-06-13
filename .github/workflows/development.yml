@@ -3,6 +3,10 @@ name: Android CI Development
 env:
   # The name of the main module repository
   main_project_module: app
+  STORE_PASSWORD: ${{ secrets.STORE_PASSWORD }}
+  KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+  KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+  SERVICE_CREDENTIAL: $GITHUB_WORKSPACE/service-account-file.json
 
 on:
   # Triggers the workflow on push or pull request events but only for default and protected branches
@@ -60,8 +64,3 @@ jobs:
 
       - name: Build Development Debug and Upload
         run: ./gradlew assembleDevelopmentDebug appDistributionUploadDevelopmentDebug
-        env:
-          STORE_PASSWORD: ${{ secrets.STORE_PASSWORD }}
-          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
-          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
-          SERVICE_CREDENTIAL: $GITHUB_WORKSPACE/service-account-file.json
