@@ -70,10 +70,20 @@ android {
         }
         all {
             firebaseAppDistribution {
-                val localProperties = readProperties(file("$rootDir/local.properties"))
                 testers = "reski.mulud@gmail.com"
                 artifactType = "APK"
-                serviceCredentialsFile = if (!localProperties.isEmpty) localProperties["serviceCredentialFilePath"] as String else System.getenv("SERVICE_CREDENTIAL")
+                try {
+                    val fileLocalProperties = file("$rootDir/local.properties")
+                    val localProperties = readProperties(fileLocalProperties)
+
+                    if (fileLocalProperties.exists()) {
+                        serviceCredentialsFile = localProperties["serviceCredentialFilePath"] as String
+                    } else {
+                        throw NoSuchFileException(fileLocalProperties)
+                    }
+                } catch (e: NoSuchFileException) {
+                    serviceCredentialsFile = System.getenv("SERVICE_CREDENTIAL")
+                }
             }
         }
     }
