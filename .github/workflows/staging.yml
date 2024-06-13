@@ -1,4 +1,4 @@
-name: Android CI/CD Development
+name: Android CI Development
 
 env:
   main_project_module: app
@@ -9,9 +9,9 @@ env:
 
 on:
   push:
-    branches: [ development ]
+    branches: [ staging ]
   pull_request:
-    branches: [ development ]
+    branches: [ staging ]
 
 jobs:
   build:
@@ -30,10 +30,10 @@ jobs:
         run: chmod +x ./gradlew
 
       - name: Build gradle project
-        run: ./gradlew buildDevelopmentDebug buildDevelopmentRelease
+        run: ./gradlew buildStagingDebug buildStagingRelease
 
       - name: Run lint tests
-        run: ./gradlew testDevelopmentDebug
+        run: ./gradlew testStagingDebug
 
   deploy:
     name: Upload to Firebase App Distribution
@@ -55,4 +55,4 @@ jobs:
         run: chmod +x ./gradlew
 
       - name: Build Development Debug and Upload
-        run: ./gradlew assembleDevelopmentAndUpload
+        run: ./gradlew assembleStagingAndUpload

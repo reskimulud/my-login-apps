@@ -106,25 +106,23 @@ android {
             dimension = "env"
             buildConfigField("int", "STAGE_TYPE", "0")
             applicationIdSuffix = ".dev"
-            versionNameSuffix = "-$buildTypes"
             firebaseAppDistribution {
-                this.releaseNotes = "My Login Apps $buildTypes v$versionName"
+                releaseNotes = "My Login Apps (Debug) v${defaultConfig.versionName}"
             }
         }
         create("staging") {
             dimension = "env"
             buildConfigField("int", "STAGE_TYPE", "1")
             applicationIdSuffix = ".stag"
-            versionNameSuffix = "-$buildTypes"
             firebaseAppDistribution {
-                this.releaseNotes = "My Login Apps $buildTypes v$versionName"
+                releaseNotes = "My Login Apps (Debug) v${defaultConfig.versionName}"
             }
         }
         create("production") {
             dimension = "env"
             buildConfigField("int", "STAGE_TYPE", "2")
             firebaseAppDistribution {
-                this.releaseNotes = "My Login Apps v$versionName"
+                releaseNotes = "My Login Apps v${defaultConfig.versionName}"
             }
         }
     }
@@ -159,6 +157,22 @@ dependencies {
 
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.crashlytics)
+}
+
+tasks {
+    register("assembleDevelopmentAndUpload") {
+        group = "Custom"
+        description = "Assemble development debug (build APK) and upload it to App Distribution"
+
+        dependsOn("assembleDevelopmentDebug", "appDistributionUploadDevelopmentDebug")
+    }
+
+    register("assembleStagingAndUpload") {
+        group = "Custom"
+        description = "Assemble staging debug (build APK) and upload it to App Distribution"
+
+        dependsOn("assembleStagingDebug", "appDistributionUploadStagingDebug")
+    }
 }
 
 fun generateVersionCode() : Int {
