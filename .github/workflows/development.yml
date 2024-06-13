@@ -6,7 +6,7 @@ env:
   STORE_PASSWORD: ${{ secrets.STORE_PASSWORD }}
   KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
   KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
-  SERVICE_CREDENTIAL: $GITHUB_WORKSPACE/service-account-file.json
+  SERVICE_CREDENTIAL: ${{ github.workspace }}/service-account-file.json
 
 on:
   # Triggers the workflow on push or pull request events but only for default and protected branches
@@ -48,7 +48,7 @@ jobs:
       - uses: actions/checkout@v1
 
       - name: Decode Firebase service account
-        run: echo ${{ secrets.SERVICE_CREDENTIAL }} | base64 --decode > $GITHUB_WORKSPACE/service-account-file.json
+        run: echo ${{ secrets.SERVICE_CREDENTIAL }} | base64 --decode > ${{ github.workspace }}/service-account-file.json
 
       - name: Set Up JDK
         uses: actions/setup-java@v1
