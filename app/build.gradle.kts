@@ -40,9 +40,9 @@ android {
             storeFile = file("$rootDir/market/myloginapps.jks")
             try {
                 val fileLocalProperties = file("$rootDir/local.properties")
-                val localProperties = readProperties(fileLocalProperties)
 
                 if (fileLocalProperties.exists()) {
+                    val localProperties = readProperties(fileLocalProperties)
                     storePassword = localProperties["storePassword"] as String
                     keyAlias = localProperties["keyAlias"] as String
                     keyPassword = localProperties["keyPassword"] as String
@@ -74,9 +74,9 @@ android {
                 artifactType = "APK"
                 try {
                     val fileLocalProperties = file("$rootDir/local.properties")
-                    val localProperties = readProperties(fileLocalProperties)
 
                     if (fileLocalProperties.exists()) {
+                        val localProperties = readProperties(fileLocalProperties)
                         serviceCredentialsFile = localProperties["serviceCredentialFilePath"] as String
                     } else {
                         throw NoSuchFileException(fileLocalProperties)
