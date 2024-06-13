@@ -38,13 +38,18 @@ android {
     signingConfigs {
         all {
             storeFile = file("$rootDir/market/myloginapps.jks")
-            val localProperties = readProperties(file("$rootDir/local.properties"))
+            try {
+                val fileLocalProperties = file("$rootDir/local.properties")
+                val localProperties = readProperties(fileLocalProperties)
 
-            if (!localProperties.isEmpty) {
-                storePassword = localProperties["storePassword"] as String
-                keyAlias = localProperties["keyAlias"] as String
-                keyPassword = localProperties["keyPassword"] as String
-            } else {
+                if (fileLocalProperties.exists()) {
+                    storePassword = localProperties["storePassword"] as String
+                    keyAlias = localProperties["keyAlias"] as String
+                    keyPassword = localProperties["keyPassword"] as String
+                } else {
+                    throw NoSuchFileException(fileLocalProperties)
+                }
+            } catch (e: NoSuchFileException) {
                 storePassword = System.getenv("STORE_PASSWORD")
                 keyAlias = System.getenv("KEY_ALIAS")
                 keyPassword = System.getenv("KEY_PASSWORD")
