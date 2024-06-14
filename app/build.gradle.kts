@@ -18,7 +18,7 @@ ext {
     set("majorVersion", 1)
     set("minorVersion", 0)
     set("patchVersion", 0)
-    set("developmentVersion", 1)
+    set("developmentVersion", 2)
     set("preReleaseVersion", null)
 }
 
@@ -158,6 +158,11 @@ dependencies {
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.crashlytics)
     implementation(libs.firebase.auth)
+
+    implementation(libs.play.services.auth)
+    implementation(libs.androidx.credentials)
+    implementation(libs.androidx.credentials.play.services.auth)
+    implementation(libs.googleid)
 }
 
 tasks {
