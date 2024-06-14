@@ -8,10 +8,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="PLACEHOLDER" />
-                  <option name="mobileSdkAppId" value="" />
-                  <option name="projectId" value="" />
-                  <option name="projectNumber" value="" />
+                  <option name="appId" value="io.github.reskimulud.myloginapps.dev" />
+                  <option name="mobileSdkAppId" value="1:295649079718:android:7bc4f19567e79e65821f67" />
+                  <option name="projectId" value="mankart" />
+                  <option name="projectNumber" value="295649079718" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />
